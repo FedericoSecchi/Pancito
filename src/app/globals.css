@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Pancito palette – restrained earthy, cream/moss/warm brown */
+:root {
+  --leather: #5e3721;
+  --fall-leaves: #8d5c2f;
+  --mustard: #c5953e;
+  --trail-dust: #cbb38b;
+  --field-notes: #f4eee6;
+  --pine-dew: #bfbfa2;
+  --moss-pillow: #7e7639;
+  --pnw-breeze: #443b1c;
+
+  --background: var(--field-notes);
+  --foreground: var(--pnw-breeze);
+  --accent: var(--moss-pillow);
+  --accent-warm: var(--mustard);
+  --muted: var(--trail-dust);
+  --surface: #fff;
+}
+
+@theme inline {
+  --color-leather: var(--leather);
+  --color-fall-leaves: var(--fall-leaves);
+  --color-mustard: var(--mustard);
+  --color-trail-dust: var(--trail-dust);
+  --color-field-notes: var(--field-notes);
+  --color-pine-dew: var(--pine-dew);
+  --color-moss-pillow: var(--moss-pillow);
+  --color-pnw-breeze: var(--pnw-breeze);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-warm: var(--accent-warm);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --font-display: var(--font-nunito);
+  --font-sans: var(--font-source-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+}
