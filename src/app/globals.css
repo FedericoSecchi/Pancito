@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Pancito palette – restrained earthy, cream/moss/warm brown */
+/* Pancito palette – restrained earthy (Leather, Field Notes, Moss Pillow, PNW Breeze, etc.) */
 :root {
   --leather: #5e3721;
   --fall-leaves: #8d5c2f;
@@ -16,7 +16,7 @@
   --accent: var(--moss-pillow);
   --accent-warm: var(--mustard);
   --muted: var(--trail-dust);
-  --surface: #fff;
+  --surface: #fefdfb;
 }
 
 @theme inline {

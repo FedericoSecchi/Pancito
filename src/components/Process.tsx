@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { copy } from "@/data/copy";
+import { PatternBackground } from "./PatternBackground";
 
 export function Process() {
   return (
-    <Section id="proceso" stagger={0} className="bg-field-notes py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+    <Section id="proceso" stagger={0} className="relative bg-field-notes py-20 sm:py-28">
+      <PatternBackground opacity={0.035} />
+      <div className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-pnw-breeze sm:text-4xl md:text-center"
           initial={{ opacity: 0, y: 16 }}

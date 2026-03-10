@@ -29,8 +29,9 @@ Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el buil
 ## Despliegue (GitHub Pages)
 
 - El sitio se publica en **https://federicosecchi.github.io/Pancito**
-- En el repo: **Settings → Pages → Source**: elegir **GitHub Actions**
-- Cada push a `main` ejecuta `.github/workflows/deploy.yml`: instala dependencias, hace `npm run build` y sube `out/` a GitHub Pages.
+- En el repo: **Settings → Pages → Build and deployment → Source**: elegir **GitHub Actions**
+- Cada push a `main` ejecuta `.github/workflows/deploy.yml`: instala dependencias, hace `npm run build` (export estático a `out/`) y sube el artefacto a GitHub Pages.
+- Los assets en `public/assets` (p. ej. `pattern-bakery.png`) se sirven con el `basePath` correcto en producción.
 
 ## Estructura
 
@@ -44,6 +45,7 @@ Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el buil
 - **WhatsApp:** cambiar `WHATSAPP_NUMBER` en `src/data/site.ts` (formato: 54911xxxxyyyy para Argentina).
 - **Productos y precios:** editar `src/data/products.ts`.
 - **Textos y copy:** `src/data/copy.ts` y `src/data/site.ts`.
+- **Imágenes de marca:** colocar en `public/assets/` y referenciar con `assetUrl("/assets/nombre.png")` para que respeten el `basePath` en GitHub Pages.
 
 ## Próximos pasos (no incluidos en esta versión)
 
