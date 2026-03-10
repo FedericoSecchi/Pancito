@@ -11,14 +11,16 @@ export interface CartItem {
   quantity: number;
 }
 
+import { copy } from "@/data/copy";
+
 export function buildWhatsAppOrderMessage(items: CartItem[]): string {
   const lines = items
     .filter((i) => i.quantity > 0)
     .map((i) => `- ${i.quantity} ${i.product.name}`);
   const body = [
-    "Hola, quiero hacer un pedido de Pancito:",
+    copy.whatsapp.messageIntro,
     ...lines,
-    "Gracias.",
+    copy.whatsapp.messageThanks,
   ].join("\n");
   return encodeURIComponent(body);
 }

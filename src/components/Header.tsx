@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { site } from "@/data/site";
+import { copy } from "@/data/copy";
 import { Button } from "./Button";
 import { getWhatsAppOrderUrl } from "@/lib/whatsapp";
 
@@ -20,13 +20,13 @@ export function Header() {
             href="#productos"
             className="hidden text-sm font-medium text-pnw-breeze/90 transition hover:text-pnw-breeze sm:block"
           >
-            Productos
+            {copy.header.navProductos}
           </Link>
           <Link
             href="#pedidos"
             className="hidden text-sm font-medium text-pnw-breeze/90 transition hover:text-pnw-breeze sm:block"
           >
-            Pedidos
+            {copy.header.navPedidos}
           </Link>
           <Button
             href={whatsappUrl}
@@ -34,7 +34,7 @@ export function Header() {
             external
             className="py-2.5 text-base"
           >
-            Pedir por WhatsApp
+            {copy.header.cta}
           </Button>
         </nav>
       </div>

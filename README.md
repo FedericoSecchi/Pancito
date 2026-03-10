@@ -4,7 +4,7 @@ Sitio web del micro-obrador Pancito: pan de masa madre, fermentación lenta, con
 
 ## Stack
 
-- **Next.js** (App Router)
+- **Next.js** (App Router, static export)
 - **TypeScript**
 - **Tailwind CSS** v4
 - **Framer Motion**
@@ -18,25 +18,32 @@ npm run dev
 
 Abrir [http://localhost:3000](http://localhost:3000).
 
-## Build
+## Build y export estático
 
 ```bash
 npm run build
-npm start
 ```
+
+Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el build usa `basePath: /Pancito` y se despliega automáticamente al hacer push a `main`.
+
+## Despliegue (GitHub Pages)
+
+- El sitio se publica en **https://federicosecchi.github.io/Pancito**
+- En el repo: **Settings → Pages → Source**: elegir **GitHub Actions**
+- Cada push a `main` ejecuta `.github/workflows/deploy.yml`: instala dependencias, hace `npm run build` y sube `out/` a GitHub Pages.
 
 ## Estructura
 
 - `src/app/` — Rutas y layout
 - `src/components/` — Componentes reutilizables (Hero, Products, OrderFlow, etc.)
-- `src/data/` — Datos editables: productos (`products.ts`), sitio y WhatsApp (`site.ts`)
+- `src/data/` — Datos y copy: productos (`products.ts`), sitio y WhatsApp (`site.ts`), textos (`copy.ts`)
 - `src/lib/` — Lógica (generador de mensaje WhatsApp)
 
 ## Configuración
 
 - **WhatsApp:** cambiar `WHATSAPP_NUMBER` en `src/data/site.ts` (formato: 54911xxxxyyyy para Argentina).
 - **Productos y precios:** editar `src/data/products.ts`.
-- **Copy y redes:** `src/data/site.ts`.
+- **Textos y copy:** `src/data/copy.ts` y `src/data/site.ts`.
 
 ## Próximos pasos (no incluidos en esta versión)
 

@@ -15,14 +15,15 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Pancito | Pan de masa madre y fermentación lenta",
+  title: "Pancito | Fermentaciones lentas",
   description:
-    "Micro-obrador de masa madre y conservas lentas. Fermentación lenta, pequeñas tandas, precisión y obsesión por el detalle.",
+    "Micro-obrador de masa madre y fermentaciones lentas. Pequeñas tandas cada semana.",
   openGraph: {
-    title: "Pancito | Pan de masa madre y fermentación lenta",
+    title: "Pancito | Fermentaciones lentas",
     description:
-      "Micro-obrador de masa madre y conservas lentas. Fermentación lenta, pequeñas tandas, precisión y obsesión por el detalle.",
+      "Micro-obrador de masa madre y fermentaciones lentas. Pequeñas tandas cada semana.",
     type: "website",
+    locale: "es_AR",
   },
 };
 

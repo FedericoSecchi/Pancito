@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Button } from "./Button";
+import { copy } from "@/data/copy";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export function Newsletter() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Avisos de horneadas
+          {copy.newsletter.title}
         </motion.h2>
         <motion.p
           className="mt-4 text-lg text-pnw-breeze/85"
@@ -38,7 +39,7 @@ export function Newsletter() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.05 }}
         >
-          Dejá tu correo y te avisamos cuando haya nuevas tandas y productos disponibles.
+          {copy.newsletter.intro}
         </motion.p>
         <motion.form
           onSubmit={handleSubmit}
@@ -56,7 +57,7 @@ export function Newsletter() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="tu@correo.com"
+            placeholder={copy.newsletter.placeholder}
             required
             disabled={status === "done"}
             className="w-full rounded-full border-2 border-pnw-breeze/30 bg-surface px-5 py-3.5 text-pnw-breeze placeholder:text-pnw-breeze/50 focus:border-moss-pillow focus:outline-none focus:ring-2 focus:ring-moss-pillow/30 sm:w-80"
@@ -66,7 +67,7 @@ export function Newsletter() {
             variant="primary"
             className="w-full sm:w-auto"
           >
-            {status === "loading" ? "Enviando…" : status === "done" ? "Listo" : "Anotarme"}
+            {status === "loading" ? copy.newsletter.submitting : status === "done" ? copy.newsletter.done : copy.newsletter.submit}
           </Button>
         </motion.form>
         {status === "done" && (
@@ -75,7 +76,7 @@ export function Newsletter() {
             animate={{ opacity: 1 }}
             className="mt-4 text-sm text-moss-pillow"
           >
-            Gracias. Te avisamos en la próxima horneada.
+            {copy.newsletter.thankYou}
           </motion.p>
         )}
       </div>

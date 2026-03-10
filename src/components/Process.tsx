@@ -2,25 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Section } from "./Section";
-
-const steps = [
-  {
-    title: "Masa madre viva",
-    text: "Nuestra masa madre es un sistema vivo. La alimentamos, la observamos y la dejamos trabajar con tiempo.",
-  },
-  {
-    title: "Fermentación lenta",
-    text: "Cada pan y cada conserva siguen el mismo principio: dejar que el tiempo transforme los ingredientes.",
-  },
-  {
-    title: "Pequeñas tandas",
-    text: "Horneamos en cantidades controladas. Sin prisas, con atención al detalle en cada pieza.",
-  },
-  {
-    title: "Compotas con la misma lógica",
-    text: "Las conservas y compotas se elaboran con la misma filosofía de tiempo, fermentación y transformación.",
-  },
-];
+import { copy } from "@/data/copy";
 
 export function Process() {
   return (
@@ -33,7 +15,7 @@ export function Process() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Cómo trabajamos
+          {copy.proceso.title}
         </motion.h2>
         <motion.p
           className="mt-4 max-w-2xl text-lg text-pnw-breeze/85 md:mx-auto md:text-center"
@@ -42,10 +24,10 @@ export function Process() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.05 }}
         >
-          Cada pan nace de una fermentación lenta. Cada conserva respeta el mismo principio: dejar que el tiempo transforme los ingredientes.
+          {copy.proceso.intro}
         </motion.p>
         <ul className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
+          {copy.proceso.steps.map((step, i) => (
             <motion.li
               key={step.title}
               className="rounded-2xl bg-surface/80 p-6 shadow-sm"

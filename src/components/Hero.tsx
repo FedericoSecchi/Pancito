@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Button } from "./Button";
 import { site } from "@/data/site";
+import { copy } from "@/data/copy";
 import { getWhatsAppOrderUrl } from "@/lib/whatsapp";
 
 export function Hero() {
@@ -42,7 +43,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Pancito es un micro-obrador de masa madre y conservas lentas. Trabajamos con precisión, tiempo y obsesión por el detalle.
+          {copy.hero.subheadline}
         </motion.p>
         <motion.div
           className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
@@ -51,10 +52,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <Button href={whatsappUrl} variant="primary" external className="bg-field-notes text-pnw-breeze hover:bg-trail-dust">
-            Pedir por WhatsApp
+            {copy.hero.ctaPrimary}
           </Button>
           <Button href="#productos" variant="secondary" className="border-field-notes text-field-notes hover:bg-field-notes hover:text-pnw-breeze">
-            Ver productos
+            {copy.hero.ctaSecondary}
           </Button>
         </motion.div>
       </div>

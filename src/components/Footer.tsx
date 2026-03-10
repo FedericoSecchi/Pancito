@@ -3,17 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { site } from "@/data/site";
+import { copy } from "@/data/copy";
 import { getWhatsAppOrderUrl } from "@/lib/whatsapp";
 import { Button } from "./Button";
-
-const links = [
-  { href: "#concepto", label: "Qué hacemos" },
-  { href: "#proceso", label: "Proceso" },
-  { href: "#productos", label: "Productos" },
-  { href: "#pedidos", label: "Pedidos" },
-  { href: "#filosofia", label: "Filosofía" },
-  { href: "#newsletter", label: "Newsletter" },
-];
 
 export function Footer() {
   const whatsappUrl = getWhatsAppOrderUrl([]);
@@ -27,7 +19,7 @@ export function Footer() {
               {site.name}
             </Link>
             <p className="mt-2 max-w-xs text-sm text-field-notes/80">
-              Micro-obrador de masa madre y conservas lentas.
+              {copy.footer.tagline}
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Button
@@ -50,7 +42,7 @@ export function Footer() {
           </div>
           <nav aria-label="Enlaces del sitio">
             <ul className="flex flex-wrap gap-x-8 gap-y-2">
-              {links.map((link) => (
+              {copy.footer.links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -69,7 +61,7 @@ export function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <p>© {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} {site.name}. {copy.footer.rights}</p>
         </motion.div>
       </div>
     </footer>

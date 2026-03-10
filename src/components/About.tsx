@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Section } from "./Section";
+import { copy } from "@/data/copy";
 
 export function About() {
   return (
@@ -14,7 +15,7 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          No somos una panadería tradicional
+          {copy.concepto.title}
         </motion.h2>
         <motion.div
           className="mt-8 space-y-6 text-lg leading-relaxed text-pnw-breeze/90"
@@ -23,12 +24,8 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <p>
-            Pancito es un obrador obsesivo construido alrededor del tiempo, la fermentación, la precisión y la transformación. Creemos en ingredientes simples y resultados complejos: cada pan nace de una fermentación lenta; cada conserva respeta el mismo principio.
-          </p>
-          <p>
-            Trabajamos en pequeñas tandas. No industrializamos. Aplicamos una precisión casi científica al oficio, pero el resultado es profundamente humano.
-          </p>
+          <p>{copy.concepto.paragraph1}</p>
+          <p>{copy.concepto.paragraph2}</p>
         </motion.div>
       </div>
     </Section>

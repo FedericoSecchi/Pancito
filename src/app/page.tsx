@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
+import { DividerLine } from "@/components/DividerLine";
 import { Process } from "@/components/Process";
 import { Products } from "@/components/Products";
 import { OrderFlow } from "@/components/OrderFlow";
@@ -15,10 +16,13 @@ export default function Home() {
       <main className="pt-[72px]">
         <Hero />
         <About />
+        <DividerLine />
         <Process />
+        <DividerLine />
         <Products />
         <OrderFlow />
         <Philosophy />
+        <DividerLine />
         <Newsletter />
         <Footer />
       </main>

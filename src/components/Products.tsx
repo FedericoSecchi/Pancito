@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { products } from "@/data/products";
+import { copy } from "@/data/copy";
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat("es-AR", {
@@ -24,7 +25,7 @@ export function Products() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Productos
+          {copy.productos.title}
         </motion.h2>
         <motion.p
           className="mt-4 max-w-xl text-lg text-pnw-breeze/85"
@@ -33,7 +34,7 @@ export function Products() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.05 }}
         >
-          Pan de masa madre, focaccia, rolls y compotas. Todo con fermentación lenta y pequeñas tandas.
+          {copy.productos.intro}
         </motion.p>
         <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product, i) => (

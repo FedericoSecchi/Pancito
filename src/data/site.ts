@@ -7,7 +7,7 @@ export const WHATSAPP_NUMBER = "5491112345678";
 
 export const site = {
   name: "Pancito",
-  tagline: "Fermentaciones lentas. Ingredientes simples.",
+  tagline: "El tiempo transforma los ingredientes.",
   instagram: "https://instagram.com/pancito", // placeholder
   email: "hola@pancito.com", // placeholder
 } as const;

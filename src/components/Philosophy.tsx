@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Section } from "./Section";
+import { copy } from "@/data/copy";
 
 export function Philosophy() {
   return (
@@ -14,7 +15,7 @@ export function Philosophy() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Obsesión, precisión y tiempo
+          {copy.filosofia.title}
         </motion.h2>
         <motion.div
           className="mt-8 space-y-6 text-lg leading-relaxed text-pnw-breeze/90"
@@ -23,12 +24,8 @@ export function Philosophy() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <p>
-            La fermentación no es un paso más en la receta: es la identidad del proyecto. Creemos en ingredientes simples transformados con tiempo y control. La masa madre es un sistema vivo; las conservas siguen la misma lógica de espera y transformación.
-          </p>
-          <p>
-            Pequeñas tandas, cocción lenta, obrador antes que fábrica. Sin prisas ni atajos. El resultado es un pan y unas conservas que hablan de proceso, no de producción.
-          </p>
+          <p>{copy.filosofia.paragraph1}</p>
+          <p>{copy.filosofia.paragraph2}</p>
         </motion.div>
       </div>
     </Section>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Button } from "./Button";
 import { products } from "@/data/products";
+import { copy } from "@/data/copy";
 import { getWhatsAppOrderUrl, type CartItem } from "@/lib/whatsapp";
 
 function formatPrice(n: number) {
@@ -48,7 +49,7 @@ export function OrderFlow() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Armá tu pedido
+          {copy.pedidos.title}
         </motion.h2>
         <motion.p
           className="mt-4 text-lg text-field-notes/90"
@@ -57,7 +58,7 @@ export function OrderFlow() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.05 }}
         >
-          Horneamos en pequeñas tandas. Elegí tus productos y armá tu pedido por WhatsApp.
+          {copy.pedidos.intro}
         </motion.p>
 
         <ul className="mt-10 space-y-4">
@@ -114,10 +115,10 @@ export function OrderFlow() {
         >
           <div className="text-center sm:text-left">
             <p className="text-field-notes/90">
-              {totalItems} {totalItems === 1 ? "producto" : "productos"}
+              {totalItems} {copy.pedidos.productsLabel(totalItems)}
             </p>
             <p className="font-display text-xl font-bold text-field-notes">
-              Total {formatPrice(totalPrice)}
+              {copy.pedidos.totalLabel} {formatPrice(totalPrice)}
             </p>
           </div>
           {totalItems > 0 ? (
@@ -127,18 +128,18 @@ export function OrderFlow() {
               external
               className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
             >
-              Enviar pedido por WhatsApp
+              {copy.pedidos.ctaSend}
             </Button>
           ) : (
             <span className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-field-notes/40 bg-field-notes/10 px-6 py-3.5 font-display text-lg font-semibold text-field-notes/70">
-              Elegí cantidades arriba
+              {copy.pedidos.ctaEmpty}
             </span>
           )}
         </motion.div>
 
         {totalItems === 0 && (
           <p className="mt-4 text-center text-sm text-field-notes/70">
-            Sumá cantidades y luego abrí WhatsApp para enviar tu pedido.
+            {copy.pedidos.hintEmpty}
           </p>
         )}
       </div>

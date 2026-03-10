@@ -14,25 +14,25 @@ export const products: Product[] = [
   {
     id: "pan-masa-madre",
     name: "Pan de masa madre",
-    description: "Fermentación lenta, corteza marcada, miga viva.",
+    description: "Fermentación natural de 24 horas.",
     price_ars: 9000,
   },
   {
     id: "focaccia",
     name: "Focaccia",
-    description: "Aceite de oliva, sal y una cocción dorada y precisa.",
+    description: "Aceite de oliva, sal y cocción dorada.",
     price_ars: 6000,
   },
   {
     id: "rolls",
     name: "Rolls",
-    description: "Masa suave, especias y detalle artesanal.",
+    description: "Masa suave con especias.",
     price_ars: 2500,
   },
   {
     id: "compotas",
-    name: "Compotas / conservas",
-    description: "Fruta trabajada con la misma lógica del tiempo y la transformación.",
+    name: "Compotas fermentadas",
+    description: "Fruta transformada con el mismo respeto por el tiempo.",
     price_ars: 5000,
   },
 ];
