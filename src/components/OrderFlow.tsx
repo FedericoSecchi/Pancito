@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Button } from "./Button";
 import { products } from "@/data/products";
 import { copy } from "@/data/copy";
 import { getWhatsAppOrderUrl, type CartItem } from "@/lib/whatsapp";
+import { assetUrl } from "@/lib/assetUrl";
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat("es-AR", {
@@ -38,10 +39,36 @@ export function OrderFlow() {
     0
   );
   const whatsappUrl = getWhatsAppOrderUrl(cart);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [animateModal, setAnimateModal] = useState(false);
+
+  useEffect(() => {
+    if (!showConfirmModal) setAnimateModal(false);
+  }, [showConfirmModal]);
+
+  useEffect(() => {
+    if (showConfirmModal) {
+      const id = setTimeout(() => setAnimateModal(true), 50);
+      return () => clearTimeout(id);
+    }
+  }, [showConfirmModal]);
+
+  const openWhatsAppOrder = useCallback(() => {
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setShowConfirmModal(false);
+  }, [whatsappUrl]);
 
   return (
-    <Section id="pedidos" stagger={0} className="bg-moss-pillow py-20 sm:py-28">
-      <div className="mx-auto max-w-3xl px-6 sm:px-8">
+    <Section id="pedidos" stagger={0} className="relative overflow-hidden py-20 sm:py-28">
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${assetUrl("/assets/pedidos-background.png")})`,
+        }}
+      />
+      <div className="absolute inset-0 bg-black/20" aria-hidden />
+      <div className="relative z-10 mx-auto max-w-3xl px-6 sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-field-notes sm:text-4xl"
           initial={{ opacity: 0, y: 16 }}
@@ -75,7 +102,7 @@ export function OrderFlow() {
                 <p className="font-display font-semibold text-field-notes">
                   {item.product.name}
                 </p>
-                <p className="text-sm text-field-notes/80">
+                <p className="text-sm text-field-notes/75">
                   {formatPrice(item.product.price_ars)} c/u
                 </p>
               </div>
@@ -123,9 +150,8 @@ export function OrderFlow() {
           </div>
           {totalItems > 0 ? (
             <Button
-              href={whatsappUrl}
-              variant="primary"
-              external
+              type="button"
+              onClick={() => setShowConfirmModal(true)}
               className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
             >
               {copy.pedidos.ctaSend}
@@ -138,11 +164,85 @@ export function OrderFlow() {
         </motion.div>
 
         {totalItems === 0 && (
-          <p className="mt-4 text-center text-sm text-field-notes/70">
+          <p className="mt-4 text-center text-sm text-field-notes/75">
             {copy.pedidos.hintEmpty}
           </p>
         )}
       </div>
+
+      {/* Confirmation modal before sending to WhatsApp */}
+      {showConfirmModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="confirm-modal-title"
+        >
+          <div className="max-w-md w-full rounded-2xl bg-surface p-8 text-center shadow-xl">
+            <div className="mb-6 overflow-hidden rounded-xl">
+              <img
+                src={assetUrl("/assets/pan-masa-madre-recipiente.png")}
+                alt=""
+                className={`w-full object-cover transition-all duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  animateModal ? "translate-y-0 opacity-100 blur-0" : "translate-y-5 opacity-0 blur-[8px]"
+                }`}
+              />
+            </div>
+            <h3 id="confirm-modal-title" className="font-display text-xl font-bold text-pnw-breeze">
+              Este es su pedido
+            </h3>
+            <p className="mt-4 text-sm leading-relaxed text-pnw-breeze/90">
+              Revise su pedido antes de enviarlo. Al confirmar se abrirá WhatsApp con el mensaje listo. Solo presione enviar y coordinaremos el pago. Muchas gracias por su compra.
+            </p>
+
+            {/* Dynamic order summary */}
+            <div
+              className={`mt-6 transition-all duration-700 ease-out ${
+                animateModal ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
+              }`}
+              style={{ transitionDelay: animateModal ? "150ms" : "0ms" }}
+            >
+              <ul className="space-y-2 text-left">
+                {cart
+                  .filter((item) => item.quantity > 0)
+                  .map((item) => (
+                    <li
+                      key={item.product.id}
+                      className="flex justify-between text-sm text-pnw-breeze/90"
+                    >
+                      <span>
+                        {item.quantity} × {item.product.name}
+                      </span>
+                      <span className="font-semibold text-field-notes">
+                        {formatPrice(item.product.price_ars * item.quantity)}
+                      </span>
+                    </li>
+                  ))}
+              </ul>
+              <p className="mt-3 border-t border-pnw-breeze/20 pt-3 font-display text-lg font-bold text-pnw-breeze">
+                {copy.pedidos.totalLabel} {formatPrice(totalPrice)}
+              </p>
+            </div>
+
+            <div className="mt-6 flex justify-center gap-4">
+              <Button
+                variant="primary"
+                onClick={openWhatsAppOrder}
+                className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
+              >
+                Confirmar pedido
+              </Button>
+              <button
+                type="button"
+                onClick={() => setShowConfirmModal(false)}
+                className="rounded-full border-2 border-field-notes/40 bg-transparent px-6 py-3 font-display text-lg font-semibold text-field-notes transition-colors hover:bg-field-notes/10"
+              >
+                Volver
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Section>
   );
 }

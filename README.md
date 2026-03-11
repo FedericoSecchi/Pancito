@@ -30,7 +30,7 @@ Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el buil
 
 - El sitio se publica en **https://federicosecchi.github.io/Pancito**
 - En el repo: **Settings → Pages → Build and deployment → Source**: elegir **GitHub Actions**
-- Cada push a `main` ejecuta `.github/workflows/deploy.yml`: instala dependencias, hace `npm run build` (export estático a `out/`) y sube el artefacto a GitHub Pages.
+- Cada push a `main` ejecuta `.github/workflows/deploy-pages.yml`: instala dependencias, hace `npm run build` (export estático a `out/`) y despliega el artefacto a GitHub Pages.
 - Los assets en `public/assets` (p. ej. `pattern-bakery.png`) se sirven con el `basePath` correcto en producción.
 
 ## Estructura

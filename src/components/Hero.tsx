@@ -1,27 +1,67 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { Button } from "./Button";
 import { site } from "@/data/site";
 import { copy } from "@/data/copy";
 import { getWhatsAppOrderUrl } from "@/lib/whatsapp";
+import { assetUrl } from "@/lib/assetUrl";
 
 export function Hero() {
   const whatsappUrl = getWhatsAppOrderUrl([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
 
   return (
-    <Section id="hero" className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden">
-      {/* Dark brown hero background – palette: PNW Breeze / Leather */}
-      <div className="absolute inset-0 bg-pnw-breeze" />
-      {/* Subtle organic dot texture – cream on dark for editorial feel */}
+    <Section
+      id="hero"
+      className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden"
+    >
+      {/* 1. Base background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${assetUrl("/assets/hero-pan-recipient.png")})`,
+        }}
+      />
+      {/* 2. Background video layer */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden
+      >
+        <source
+          src={assetUrl("/assets/video/hero-bread-baking.mp4")}
+          type="video/mp4"
+        />
+      </video>
+      {/* 3. Dark overlay for text readability (40–50%) */}
+      <div
+        className="absolute inset-0 bg-pnw-breeze"
+        style={{ opacity: 0.45 }}
+        aria-hidden
+      />
+      {/* 4. Subtle SVG dot pattern overlay */}
       <div
         className="absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='1.2' fill='%23f4eee6'/%3E%3Ccircle cx='18' cy='14' r='1' fill='%23f4eee6'/%3E%3Ccircle cx='10' cy='22' r='1.2' fill='%23f4eee6'/%3E%3Ccircle cx='26' cy='8' r='0.8' fill='%23f4eee6'/%3E%3C/svg%3E")`,
         }}
+        aria-hidden
       />
-      <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center sm:px-8 md:py-28">
+      {/* 5. Content */}
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 py-20 text-center lg:py-28">
         <motion.p
           className="font-display text-sm font-semibold uppercase tracking-[0.2em] text-field-notes/70"
           initial={{ opacity: 0, y: 16 }}
@@ -31,7 +71,7 @@ export function Hero() {
           Micro-obrador
         </motion.p>
         <motion.h1
-          className="mt-2 font-display text-4xl font-extrabold tracking-tight text-field-notes sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mt-2 font-display text-4xl font-extrabold tracking-tight text-field-notes sm:text-5xl md:text-6xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.08 }}
@@ -39,7 +79,7 @@ export function Hero() {
           {site.name}
         </motion.h1>
         <motion.p
-          className="mt-5 font-display text-xl font-semibold text-field-notes/95 sm:text-2xl md:mt-6 md:text-3xl"
+          className="mt-5 font-display text-xl font-semibold text-field-notes/95 sm:text-2xl md:text-3xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.16 }}
@@ -47,7 +87,7 @@ export function Hero() {
           {site.tagline}
         </motion.p>
         <motion.p
-          className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-field-notes/85 sm:mt-6 sm:text-xl"
+          className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-field-notes/85"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.24 }}
@@ -55,7 +95,7 @@ export function Hero() {
           {copy.hero.subheadline}
         </motion.p>
         <motion.div
-          className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.32 }}
@@ -64,14 +104,14 @@ export function Hero() {
             href={whatsappUrl}
             variant="primary"
             external
-            className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
+            className="bg-moss-pillow text-field-notes transition-all duration-500 ease-out hover:bg-[#d4b36a] hover:shadow-lg hover:shadow-black/20"
           >
             {copy.hero.ctaPrimary}
           </Button>
           <Button
             href="#productos"
             variant="secondary"
-            className="border-field-notes text-field-notes hover:bg-field-notes hover:text-pnw-breeze"
+            className="border-2 border-white/80 text-white transition-all duration-500 ease-out hover:bg-white hover:text-field-notes"
           >
             {copy.hero.ctaSecondary}
           </Button>

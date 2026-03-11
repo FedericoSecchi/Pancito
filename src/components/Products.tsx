@@ -1,9 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "./Section";
 import { products } from "@/data/products";
+import type { Product } from "@/data/products";
 import { copy } from "@/data/copy";
+import { assetUrl } from "@/lib/assetUrl";
 
 function formatPrice(n: number) {
   return new Intl.NumberFormat("es-AR", {
@@ -17,8 +21,8 @@ function formatPrice(n: number) {
 /** Small hand-drawn bread icon for product cards */
 function ProductIcon({ id }: { id: string }) {
   const isFocaccia = id === "focaccia";
-  const isRoll = id === "rolls";
   const isCompota = id === "compotas";
+  const isRoll = id === "roll-canela";
   return (
     <span className="mb-3 inline-block text-moss-pillow/60" aria-hidden>
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg">
@@ -41,10 +45,43 @@ function ProductIcon({ id }: { id: string }) {
   );
 }
 
-export function Products() {
+/** Centered overlay media: video with playbackRate 0.6 */
+function OverlayVideo({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.6;
+    }
+  }, [src]);
   return (
-    <Section id="productos" stagger={0} className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-5xl px-6 sm:px-8">
+    <video
+      ref={videoRef}
+      className="absolute inset-0 h-full w-full object-cover"
+      autoPlay
+      muted
+      loop
+      playsInline
+      aria-hidden
+    >
+      <source src={assetUrl(src)} type="video/mp4" />
+    </video>
+  );
+}
+
+export function Products() {
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const hoveredProduct = activeCardId ? products.find((p) => p.id === activeCardId) ?? null : null;
+
+  return (
+    <Section id="productos" stagger={0} className="relative overflow-hidden bg-surface py-20 sm:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.65]"
+        style={{
+          backgroundImage: `url(${assetUrl("/assets/palette-reference.png")})`,
+        }}
+      />
+      <div className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-pnw-breeze sm:text-4xl"
           initial={{ opacity: 0, y: 16 }}
@@ -64,30 +101,128 @@ export function Products() {
           {copy.productos.intro}
         </motion.p>
         <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product, i) => (
+          {products.map((product, i) => {
+            const isActive = activeCardId === product.id;
+            return (
             <motion.li
               key={product.id}
-              className="group flex flex-col rounded-2xl border border-trail-dust/40 bg-field-notes/60 p-6 transition-all duration-300 hover:border-moss-pillow/40 hover:shadow-lg hover:shadow-pnw-breeze/5"
+              className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-field-notes/60 transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                isActive
+                  ? "scale-[1.05] border-moss-pillow/40 shadow-lg shadow-pnw-breeze/5"
+                  : "border-trail-dust/40"
+              }`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.06 }}
-              whileHover={{ y: -2 }}
+              onMouseEnter={() => setActiveCardId(product.id)}
+              onMouseLeave={() => setActiveCardId(null)}
             >
-              <ProductIcon id={product.id} />
-              <h3 className="font-display text-xl font-bold text-pnw-breeze">
-                {product.name}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-pnw-breeze/80">
-                {product.description}
-              </p>
-              <p className="mt-4 font-semibold text-moss-pillow">
-                {formatPrice(product.price_ars)}
-              </p>
+              {/* Media preview: pattern base + product image/video; opacity by active state */}
+              <div className="relative h-24 w-full flex-shrink-0 overflow-hidden">
+                <Image
+                  src={assetUrl("/assets/pattern-bakery.png")}
+                  alt=""
+                  fill
+                  className="object-cover opacity-20"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  unoptimized
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-field-notes/40 to-field-notes/80" />
+                {product.mediaPath && product.mediaType === "video" ? (
+                  <video
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "opacity-100" : "opacity-30"}`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    aria-hidden
+                  >
+                    <source src={assetUrl(product.mediaPath)} type="video/mp4" />
+                  </video>
+                ) : product.mediaPath && product.mediaType === "image" ? (
+                  <img
+                    src={assetUrl(product.mediaPath)}
+                    alt=""
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "opacity-100" : "opacity-30"}`}
+                    aria-hidden
+                  />
+                ) : null}
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                {product.label && (
+                  <span className="mb-2 inline-block text-xs font-semibold uppercase tracking-wider text-moss-pillow/80">
+                    {product.label}
+                  </span>
+                )}
+                <ProductIcon id={product.id} />
+                <h3 className="font-display text-xl font-bold text-pnw-breeze">
+                  {product.name}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-pnw-breeze/80">
+                  {product.description}
+                </p>
+                <p className="mt-4 font-semibold text-moss-pillow">
+                  {formatPrice(product.price_ars)}
+                </p>
+              </div>
             </motion.li>
-          ))}
+          );
+          })}
         </ul>
       </div>
+
+      {/* Centered focus overlay on card hover */}
+      <AnimatePresence>
+        {hoveredProduct && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-40 bg-black/60"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              aria-hidden
+              style={{ pointerEvents: "none" }}
+            />
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center p-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              style={{ pointerEvents: "none" }}
+            >
+              <motion.div
+                className="w-full max-w-2xl overflow-hidden rounded-2xl bg-field-notes/95 shadow-2xl"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <p className="px-6 pt-6 text-center font-display text-2xl font-bold text-pnw-breeze sm:text-3xl">
+                  {hoveredProduct.name}
+                </p>
+                <div className="relative aspect-video w-full overflow-hidden">
+                  {hoveredProduct.mediaType === "video" && hoveredProduct.mediaPath ? (
+                    <OverlayVideo src={hoveredProduct.mediaPath} />
+                  ) : hoveredProduct.mediaType === "image" && hoveredProduct.mediaPath ? (
+                    <img
+                      src={assetUrl(hoveredProduct.mediaPath)}
+                      alt=""
+                      className="h-full w-full object-cover"
+                      aria-hidden
+                    />
+                  ) : null}
+                </div>
+                <p className="px-6 pb-6 text-center text-pnw-breeze/90">
+                  {hoveredProduct.description}
+                </p>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </Section>
   );
 }

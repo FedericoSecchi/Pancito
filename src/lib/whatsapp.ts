@@ -5,13 +5,12 @@
 
 import type { Product } from "@/data/products";
 import { WHATSAPP_NUMBER } from "@/data/site";
+import { copy } from "@/data/copy";
 
 export interface CartItem {
   product: Product;
   quantity: number;
 }
-
-import { copy } from "@/data/copy";
 
 export function buildWhatsAppOrderMessage(items: CartItem[]): string {
   const lines = items

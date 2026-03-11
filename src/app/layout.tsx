@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Source_Sans_3 } from "next/font/google";
+import { OvenLoaderGate } from "@/components/OvenLoaderGate";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -37,7 +38,7 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${sourceSans.variable} antialiased`}
       >
-        {children}
+        <OvenLoaderGate>{children}</OvenLoaderGate>
       </body>
     </html>
   );

@@ -3,12 +3,21 @@
 import { motion } from "framer-motion";
 import { Section } from "./Section";
 import { copy } from "@/data/copy";
-import { PatternBackground } from "./PatternBackground";
+import { assetUrl } from "@/lib/assetUrl";
 
 export function Process() {
   return (
-    <Section id="proceso" stagger={0} className="relative bg-field-notes py-20 sm:py-28">
-      <PatternBackground opacity={0.035} />
+    <Section id="proceso" stagger={0} className="relative overflow-hidden bg-field-notes py-20 sm:py-28">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src={assetUrl("/assets/video/proceso-masa.mp4")} type="video/mp4" />
+      </video>
       <div className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-pnw-breeze sm:text-4xl md:text-center"
