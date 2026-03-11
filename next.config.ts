@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   basePath: process.env.NODE_ENV === "production" ? "/Pancito" : "",
   assetPrefix: process.env.NODE_ENV === "production" ? "/Pancito/" : "",
   trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
