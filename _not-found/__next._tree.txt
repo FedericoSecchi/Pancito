@@ -1,0 +1,2 @@
+:HL["/Pancito/_next/static/chunks/0abfac262d8cdbfc.css","style"]
+0:{"buildId":"fqYW6bVXeC34hE__v0o5J","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"/_not-found","paramType":null,"paramKey":"/_not-found","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
