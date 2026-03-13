@@ -14,14 +14,20 @@ const sourceSans = Source_Sans_3({
   weight: ["400", "500", "600", "700"],
 });
 
+const canonicalBase = "https://pancito.shop";
+
 export const metadata: Metadata = {
-  title: "Pancito | Fermentaciones lentas",
+  metadataBase: new URL(canonicalBase),
+  title: "Pancito — Pan de masa madre",
   description:
-    "Micro-obrador de masa madre y fermentaciones lentas. Pequeñas tandas cada semana.",
+    "Pan de masa madre, fermentación lenta y conservas artesanales.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Pancito | Fermentaciones lentas",
-    description:
-      "Micro-obrador de masa madre y fermentaciones lentas. Pequeñas tandas cada semana.",
+    title: "Pancito",
+    description: "Pan artesanal de masa madre.",
+    url: canonicalBase,
     type: "website",
     locale: "es_AR",
   },
