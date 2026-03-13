@@ -50,6 +50,19 @@ export function Footer() {
           viewport={{ once: true }}
         >
           <p>© {new Date().getFullYear()} {site.name}. {copy.footer.rights}</p>
+          <div className="footer-credit mt-2">
+            <p>
+              Diseñado por{" "}
+              <a
+                href="https://somoskosmos.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-field-notes/90 hover:text-field-notes"
+              >
+                SomosKosmos
+              </a>
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>
