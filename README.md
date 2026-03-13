@@ -24,14 +24,14 @@ Abrir [http://localhost:3000](http://localhost:3000).
 npm run build
 ```
 
-Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el build usa `basePath: /Pancito` y se despliega automáticamente al hacer push a `main`.
+Genera la carpeta `out/` con HTML, CSS y assets listos para hosting estático. Next.js usa `output: "export"` y `images.unoptimized: true` en `next.config.ts`; no hace falta `next export` (incluido en `next build`).
 
 ## Despliegue (GitHub Pages)
 
-- El sitio se publica en **https://federicosecchi.github.io/Pancito**
-- En el repo: **Settings → Pages → Build and deployment → Source**: elegir **GitHub Actions**
-- Cada push a `main` ejecuta `.github/workflows/deploy-pages.yml`: instala dependencias, hace `npm run build` (export estático a `out/`) y despliega el artefacto a GitHub Pages.
-- Los assets en `public/assets` (p. ej. `pattern-bakery.png`) se sirven con el `basePath` correcto en producción.
+- El sitio se publica en **https://pancito.shop** (dominio custom; `CNAME` en la raíz).
+- En el repo: **Settings → Pages → Build and deployment → Source**: **GitHub Actions**
+- Cada push a `main` ejecuta `.github/workflows/deploy.yml`: instala dependencias, ejecuta `npm run build` (export estático a `out/`) y sube `./out` como artefacto a GitHub Pages.
+- Los assets en `public/` se sirven desde `/assets` en producción (paths relativos a la raíz).
 
 ## Estructura
 
@@ -45,7 +45,7 @@ Genera la carpeta `out/` lista para hosting estático. Para GitHub Pages el buil
 - **WhatsApp:** cambiar `WHATSAPP_NUMBER` en `src/data/site.ts` (formato: 54911xxxxyyyy para Argentina).
 - **Productos y precios:** editar `src/data/products.ts`.
 - **Textos y copy:** `src/data/copy.ts` y `src/data/site.ts`.
-- **Imágenes de marca:** colocar en `public/assets/` y referenciar con `assetUrl("/assets/nombre.png")` para que respeten el `basePath` en GitHub Pages.
+- **Imágenes de marca:** colocar en `public/assets/` y referenciar con `assetUrl("/assets/nombre.png")` para que carguen correctamente en pancito.shop.
 
 ## Próximos pasos (no incluidos en esta versión)
 
