@@ -27,7 +27,7 @@ export function Button({
 
   const variants = {
     primary:
-      "bg-pnw-breeze text-field-notes hover:bg-leather active:scale-[0.98] px-6 py-3.5 font-display text-lg",
+      "relative overflow-hidden text-field-notes px-6 py-3.5 font-display text-lg active:scale-[0.98] bg-[url('/assets/palette-reference.png')] bg-cover bg-center before:absolute before:inset-0 before:bg-black/40 before:content-[''] hover:before:bg-black/25",
     secondary:
       "border-2 border-pnw-breeze text-pnw-breeze hover:bg-pnw-breeze hover:text-field-notes px-6 py-3.5 font-display text-lg",
     ghost:

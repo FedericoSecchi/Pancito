@@ -5,19 +5,27 @@ import { Section } from "./Section";
 import { copy } from "@/data/copy";
 import { assetUrl } from "@/lib/assetUrl";
 
+const steps = copy.proceso.steps;
+
 export function Process() {
   return (
-    <Section id="proceso" stagger={0} className="relative overflow-hidden bg-field-notes py-20 sm:py-28">
+    <Section
+      id="proceso"
+      stagger={0}
+      className="relative overflow-hidden bg-field-notes py-20 sm:py-28"
+    >
       <video
         autoPlay
         muted
         loop
         playsInline
         aria-hidden
-        className="absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
       >
         <source src={assetUrl("/assets/video/proceso-masa.mp4")} type="video/mp4" />
       </video>
+      <div className="absolute inset-0 bg-black/30" aria-hidden />
+
       <div className="relative z-10 mx-auto max-w-5xl px-6 sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-pnw-breeze sm:text-4xl md:text-center"
@@ -37,15 +45,12 @@ export function Process() {
         >
           {copy.proceso.intro}
         </motion.p>
+
         <ul className="mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {copy.proceso.steps.map((step, i) => (
-            <motion.li
+          {steps.map((step) => (
+            <li
               key={step.title}
               className="rounded-2xl bg-surface/80 p-6 shadow-sm"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
             >
               <h3 className="font-display text-lg font-bold text-moss-pillow">
                 {step.title}
@@ -53,7 +58,7 @@ export function Process() {
               <p className="mt-2 text-sm leading-relaxed text-pnw-breeze/85">
                 {step.text}
               </p>
-            </motion.li>
+            </li>
           ))}
         </ul>
       </div>

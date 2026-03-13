@@ -104,20 +104,24 @@ export function Products() {
           {products.map((product, i) => {
             const isActive = activeCardId === product.id;
             return (
-            <motion.li
-              key={product.id}
-              className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-field-notes/60 transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                isActive
-                  ? "scale-[1.05] border-moss-pillow/40 shadow-lg shadow-pnw-breeze/5"
-                  : "border-trail-dust/40"
-              }`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              onMouseEnter={() => setActiveCardId(product.id)}
-              onMouseLeave={() => setActiveCardId(null)}
-            >
+              <motion.li
+                key={product.id}
+                className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-field-notes/60 border-trail-dust/40 transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  isActive
+                    ? "scale-[1.08] z-20 shadow-2xl shadow-black/20 border-moss-pillow/50"
+                    : "scale-100 opacity-100"
+                }`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                onMouseEnter={() => {
+                  if (!activeCardId) {
+                    setActiveCardId(product.id);
+                  }
+                }}
+                onMouseLeave={() => setActiveCardId(null)}
+              >
               {/* Media preview: pattern base + product image/video; opacity by active state */}
               <div className="relative h-24 w-full flex-shrink-0 overflow-hidden">
                 <Image

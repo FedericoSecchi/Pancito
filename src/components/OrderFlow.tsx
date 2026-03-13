@@ -152,7 +152,6 @@ export function OrderFlow() {
             <Button
               type="button"
               onClick={() => setShowConfirmModal(true)}
-              className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
             >
               {copy.pedidos.ctaSend}
             </Button>
@@ -228,14 +227,13 @@ export function OrderFlow() {
               <Button
                 variant="primary"
                 onClick={openWhatsAppOrder}
-                className="bg-field-notes text-pnw-breeze hover:bg-trail-dust"
               >
                 Confirmar pedido
               </Button>
               <button
                 type="button"
                 onClick={() => setShowConfirmModal(false)}
-                className="rounded-full border-2 border-field-notes/40 bg-transparent px-6 py-3 font-display text-lg font-semibold text-field-notes transition-colors hover:bg-field-notes/10"
+                className="relative overflow-hidden rounded-full border-2 border-field-notes/40 px-6 py-3 font-display text-lg font-semibold text-field-notes bg-[url('/assets/palette-reference.png')] bg-cover bg-center before:absolute before:inset-0 before:bg-black/40 before:content-[''] hover:before:bg-black/25"
               >
                 Volver
               </button>

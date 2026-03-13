@@ -21,8 +21,9 @@ export function Newsletter() {
   };
 
   return (
-    <Section id="newsletter" stagger={0} className="bg-field-notes py-20 sm:py-28">
-      <div className="mx-auto max-w-xl px-6 text-center sm:px-8">
+    <Section id="newsletter" stagger={0} className="relative overflow-hidden bg-field-notes py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[url('/assets/process-illustrations.png')] bg-cover bg-center opacity-20" />
+      <div className="relative z-10 mx-auto max-w-xl px-6 text-center sm:px-8">
         <motion.h2
           className="font-display text-3xl font-bold text-pnw-breeze sm:text-4xl"
           initial={{ opacity: 0, y: 16 }}

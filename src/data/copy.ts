@@ -41,6 +41,11 @@ export const copy = {
       },
     ],
   },
+  fermentacion: {
+    title: "Fermentación",
+    intro: "Del grano al pan: harina, agua, masa madre y tiempo.",
+    steps: ["Harina", "Agua", "Masa madre", "Fermentación lenta", "24 horas", "Pan"],
+  },
   productos: {
     title: "Lo que hacemos",
     intro:
