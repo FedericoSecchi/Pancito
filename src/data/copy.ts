@@ -88,6 +88,11 @@ export const copy = {
       { href: "#filosofia", label: "Filosofía" },
       { href: "#newsletter", label: "Newsletter" },
     ],
+    seoLinks: [
+      { href: "/pan-masa-madre.html", label: "Pan de masa madre" },
+      { href: "/fermentacion-lenta.html", label: "Fermentación lenta" },
+      { href: "/pan-artesanal.html", label: "Pan artesanal" },
+    ],
     rights: "Todos los derechos reservados.",
   },
   header: {

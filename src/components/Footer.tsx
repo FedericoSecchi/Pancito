@@ -30,6 +30,16 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {copy.footer.seoLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-field-notes/90 underline-offset-4 transition hover:text-field-notes hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>

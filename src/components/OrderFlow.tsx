@@ -181,7 +181,7 @@ export function OrderFlow() {
             <div className="mb-6 overflow-hidden rounded-xl">
               <img
                 src={assetUrl("/assets/pan-masa-madre-recipiente.png")}
-                alt=""
+                alt="Pan de masa madre en recipiente de madera"
                 className={`w-full object-cover transition-all duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   animateModal ? "translate-y-0 opacity-100 blur-0" : "translate-y-5 opacity-0 blur-[8px]"
                 }`}

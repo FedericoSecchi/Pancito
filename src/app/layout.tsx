@@ -20,16 +20,39 @@ export const metadata: Metadata = {
   metadataBase: new URL(canonicalBase),
   title: "Pancito — Pan de masa madre",
   description:
-    "Pan de masa madre, fermentación lenta y conservas artesanales.",
+    "Pan de masa madre artesanal. Fermentación lenta, ingredientes simples y conservas naturales.",
+  keywords: [
+    "pan masa madre",
+    "pan artesanal",
+    "pan fermentación lenta",
+    "compotas fermentadas",
+  ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Pancito",
-    description: "Pan artesanal de masa madre.",
+    title: "Pancito — Pan de masa madre",
+    description: "Pan artesanal fermentado lentamente.",
     url: canonicalBase,
     type: "website",
     locale: "es_AR",
+  },
+};
+
+const bakeryStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  name: "Pancito",
+  url: canonicalBase,
+  image: `${canonicalBase}/assets/pan-masa-madre-recipiente.png`,
+  description:
+    "Pan artesanal de masa madre y conservas fermentadas elaboradas con fermentación lenta.",
+  servesCuisine: "Bakery",
+  areaServed: "Argentina",
+  sameAs: [] as string[],
+  brand: {
+    "@type": "Brand",
+    name: "Pancito",
   },
 };
 
@@ -43,6 +66,12 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${sourceSans.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(bakeryStructuredData),
+          }}
+        />
         {children}
       </body>
     </html>

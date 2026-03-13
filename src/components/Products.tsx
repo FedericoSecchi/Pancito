@@ -128,6 +128,7 @@ export function Products() {
                   src={assetUrl("/assets/pattern-bakery.png")}
                   alt=""
                   fill
+                  loading="lazy"
                   className="object-cover opacity-20"
                   sizes="(max-width: 768px) 100vw, 25vw"
                   unoptimized
@@ -147,7 +148,8 @@ export function Products() {
                 ) : product.mediaPath && product.mediaType === "image" ? (
                   <img
                     src={assetUrl(product.mediaPath)}
-                    alt=""
+                    alt={product.name}
+                    loading="lazy"
                     className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] ${isActive ? "opacity-100" : "opacity-30"}`}
                     aria-hidden
                   />
@@ -213,7 +215,7 @@ export function Products() {
                   ) : hoveredProduct.mediaType === "image" && hoveredProduct.mediaPath ? (
                     <img
                       src={assetUrl(hoveredProduct.mediaPath)}
-                      alt=""
+                      alt={hoveredProduct.name}
                       className="h-full w-full object-cover"
                       aria-hidden
                     />
